@@ -1,0 +1,465 @@
+package Implementare_modele;
+
+import java.util.ArrayList;
+
+class Main{
+    public static void main(String[] args) {
+
+         // ////////////////////////// //
+        // TESTAREA FUNCTIONALITATILOR //
+        // /////////////////////////// //
+
+        // I. Testarea clasei persoana
+
+        // 1. Constructorul cu parametrii
+        Persoana pers1=new Persoana("Marian","Cox","mariancox@yahoo.com","0723658750");
+        /*pers1.afisareDatePersoana();
+        System.out.println();*/
+
+        // 2. Constructorul de copiere
+        Persoana pers2=new Persoana(pers1);
+        /*pers1.afisareDatePersoana();
+        System.out.println();*/
+
+        // 3. Constructorul fara parametrii
+        Persoana pers_gol=new Persoana();
+        /*pers_gol.afisareDatePersoana();
+        System.out.println();*/
+
+        // 4. Getterii
+        /*System.out.println("Numele este: "+pers1.getNume());
+        System.out.println("Prenumele este: "+pers1.getPrenume());
+        System.out.println("Emailul este: "+pers1.getEmail());
+        System.out.println("Telefonul este: "+pers1.getTelefon());
+        System.out.println();*/
+
+        // 5. Setteri cu succes
+        pers2.setNume("Popescu");
+        //System.out.println("Numele modificat este: "+pers2.getNume());
+
+        pers2.setPrenume("Daniel");
+        //System.out.println("Prenumele modificat este: "+pers2.getPrenume());
+
+        pers2.setTelefon("0729999999");
+        //System.out.println("Telefonul modificat este: "+pers2.getTelefon());
+
+        pers2.setEmail("ceva@altceva.ro");
+        //System.out.println("Emailul modificat este: "+pers2.getEmail());
+
+        //System.out.println();
+
+        // 6. Setteri fara succes
+
+        /*String aux=null;
+        pers2.setNume(aux);
+        System.out.println("Numele modificat este: "+pers2.getNume());
+        pers2.setPrenume(aux);
+        System.out.println("Prenumele modificat este: "+pers2.getPrenume());*/
+
+        /*String nr_telefon_test=new String("072999999");
+        pers2.setTelefon(nr_telefon_test);
+        System.out.println("Telefonul modificat este: "+pers2.getTelefon());*/
+
+        /*String email_test=new String("mariansentiment");
+        pers2.setEmail(email_test);
+        System.out.println("Emailul modificat este: "+pers2.getEmail());*/
+
+        //System.out.println();
+
+        // II. Testare clasa Client
+
+        // 1. Constructorii
+
+        PiesaAuto[] pieseNecesare={PiesaAuto.FILTRU_AER,PiesaAuto.FILTRU_ULEI,PiesaAuto.BATERIE};
+        int[] cantitiatiNecesare={1,1,1};
+
+        Client cli1=new Client(pers1, TipAutomobil.A,"1234567890123456",2,pieseNecesare,cantitiatiNecesare);
+        /*cli1.afisareDatePersoana();
+        System.out.println();*/
+
+        Client cli2=new Client(pers1, TipAutomobil.A,"1234567890123456",2);
+        /*cli2.afisareDatePersoana();
+        System.out.println();*/
+
+        Client cli3=new Client("Marian","Cox","mariancox@yahoo.com","0723658750", TipAutomobil.A,"1234567890123456",2,pieseNecesare,cantitiatiNecesare);
+        /*cli3.afisareDatePersoana();
+        System.out.println();*/
+
+        Client cli4=new Client("Marian","Cox","mariancox@yahoo.com","0723658750", TipAutomobil.A,"1234567890123456",2);
+        /*cli4.afisareDatePersoana();
+        System.out.println();*/
+
+        // 2. Getteri
+        // Nu mai testam getterii pentru nume, prenume, email si telefon pt ca au fost testati initial
+
+        /*System.out.println("Categoria este: "+cli1.getCategorie());
+        System.out.println("Numarul cardului este: "+cli1.getNumarCard());*/
+
+        // Odata cand avem elemente in vectori
+
+        /*PiesaAuto[] pieseNecesare_aux=cli1.getPieseNecesare();
+        if(pieseNecesare_aux!=null){
+            System.out.println("Piesele clientului");
+            for (int i=0;i<pieseNecesare_aux.length;i++)
+                System.out.println("Piesa "+(i+1)+": "+pieseNecesare_aux[i]);
+        }
+        else
+            System.out.println("Clientul nu are piese necesare!");
+
+        int[] cantitatiNecesare_aux=cli1.getCantitatiNecesare();
+        if(cantitatiNecesare_aux!=null){
+            System.out.println("Numarul de piese necesare clientului");
+            for (int i=0;i<cantitiatiNecesare.length;i++)
+                System.out.println("Cantitatea "+(i+1)+": "+cantitatiNecesare_aux[i]);
+        }
+        else
+            System.out.println("Clientul nu are cantitati pentru piese necesare!");*/
+
+        //System.out.println();
+
+        // Odata cand nu avem elemente in vectori
+
+        /*pieseNecesare_aux=cli2.getPieseNecesare();
+        if(pieseNecesare_aux!=null){
+            System.out.println("Piesele clientului");
+            for (int i=0;i<pieseNecesare_aux.length;i++)
+                System.out.println("Piesa "+(i+1)+": "+pieseNecesare_aux[i]);
+        }
+        else
+            System.out.println("Clientul nu are piese necesare!");
+
+        cantitatiNecesare_aux=cli2.getCantitatiNecesare();
+        if(cantitatiNecesare_aux!=null){
+            System.out.println("Numarul de piese necesare clientului");
+            for (int i=0;i<cantitiatiNecesare.length;i++)
+                System.out.println("Cantitatea "+(i+1)+": "+cantitatiNecesare_aux[i]);
+        }
+        else
+            System.out.println("Clientul nu are cantitati pentru piese necesare!");*/
+
+        //System.out.println();
+
+        // 3. Actualizeaza numar vizite
+        /*System.out.println("Numarul de vizite curent: "+cli2.getNumarViziteService());
+        cli2.actualizeazaViziteService();
+        System.out.println("Numarul de vizite dupa actualizare: "+cli2.getNumarViziteService());
+        System.out.println();*/
+
+        // 4. Calculeaza procent reducere
+        /*System.out.println("Procentul de reducere: "+String.format("%.2f",cli2.calculeazaProcentReducere()));
+        System.out.println();*/
+
+        // 5. Pret serviciu
+        /*System.out.println("Pretul pentru serviciu: "+String.format("%.2f",cli2.pretServiciu()));
+        System.out.println();*/
+
+        // 6. Calculeaza pret total
+        /*int numar_operatiuni=3;
+        System.out.println("Pretul total pentru servici: "+String.format("%.2f",cli2.calculeazaPretTotal(numar_operatiuni)));
+        System.out.println();*/
+
+        // 7. Calculeaza fidelitatea
+        /*System.out.println("Fidelitatea clientului este: "+cli2.getFidelitate());
+        System.out.println();*/
+
+        //  III. Atelier
+
+        // 1. Constructorii cu parametrii
+
+        Atelier at1=new Atelier(100.25,1);
+        /*at1.afisareInformatiiAtelier();
+        System.out.println();*/
+
+        Atelier at2=new Atelier(100.25, 2, pieseNecesare, cantitiatiNecesare);
+        /*at2.afisareInformatiiAtelier();
+        System.out.println();*/
+
+        // 2. Constructorul fara parametrii
+
+        Atelier at3=new Atelier();
+        /*at3.afisareInformatiiAtelier();
+        System.out.println();*/
+
+        // 3. Getterii
+
+        /*System.out.println("Suprafata este: "+at1.getSuprafata());
+        System.out.println("Numarul de ordine este: "+at1.getNumarOrdine());*/
+
+        // Nu am mai testat getterii pentru pieseDisponibile si pentru cantitatiDisponibile pentru ca functioneaza
+        // in acelasi cod ca cei din clasa Client
+
+        // 4. Extinde suprafata
+
+        /*System.out.println("Suprafata curenta este: "+at2.getSuprafata());
+        at2.extindeSuprafata(20);
+        System.out.println("Suprafata dupa extindere este: "+at2.getSuprafata());
+        System.out.println();*/
+
+        // IV. Mecanic
+
+        // 1. Constructorii cu parametrii
+
+        Mecanic mec1=new Mecanic(pers2, TipAutomobil.A, TipVechime.mediu, true, 5000,at1);
+        /*mec1.afisareDatePersoana();
+        System.out.println();*/
+
+        Mecanic mec2=new Mecanic("Popa","Mirel","popamirel@yahoo.com","0727777777",TipAutomobil.A, TipVechime.mediu, true, 5000,at1);
+        /*mec2.afisareDatePersoana();
+        System.out.println();
+        System.out.println();*/
+
+        // 2. Getterii
+
+        /*System.out.println("Tipul de automobil este: "+mec2.getCategorieAcceptata());
+        System.out.println("Vechimea este: "+mec2.getVechime());
+        System.out.println("Disponibilitatea este: "+mec2.getDisponibilitate());
+        System.out.println("Salariul este: "+mec2.getSalariu());
+        Atelier atelier_aux=mec2.getAtelier();
+        atelier_aux.setPieseDisponibile(pieseNecesare);
+        atelier_aux.setCantitatiDisponibile(cantitiatiNecesare);
+        atelier_aux.afisareInformatiiAtelier();
+
+        System.out.println();*/
+
+        // III. 5. Adauga piese utilizate
+        System.out.println("Operatia a fost realizata cu succes: "+at1.adaugarePieseUtilizate(mec1,cli1));
+        System.out.println();
+
+        // 3. Actualizeaza disponibilitatea
+
+        /*System.out.println("Disponibilitatea curenta: "+mec2.getDisponibilitate());
+        mec2.actualizeazaDisponibilitate(false);
+        System.out.println("Disponibilitatea dupa actualizare: "+mec2.getDisponibilitate());
+        System.out.println();*/
+
+        // 4. Emitere raport
+
+        /*System.out.println(mec2.emitereRaport(cli2,"Ceva IDK"));
+        System.out.println();*/
+
+        // 5. Poate repara masina
+
+        /*System.out.println("Se poate repara masina: " + (mec2.poateReparaMasinaClient(cli2) ? "DA" : "NU"));
+        System.out.println();*/
+
+        // 6. Timp reparare masina
+
+        /*System.out.println("Timpul necesar pentru repararea masinii: "+mec2.timpReparareMasina(cli1));
+        System.out.println();*/
+
+        // 7. Emitere raport
+
+        /*System.out.println(mec2.emitereRaport(cli2,"CEVA"));
+        System.out.println();*/
+
+        // 8. Adauga piese disponibile
+
+        /*System.out.println("S-a realizat operatia cu succes: "+mec2.adaugarePieseUtilizate(cli1,at2.getPieseDisponibile(),at2.getCantitatiDisponibile(),cli1.getPieseNecesare(),cli1.getCantitatiNecesare()));
+        System.out.println();*/
+
+        // V. Birou
+
+        // 1. Constuctorul cu parametii
+
+        Birou bir=new Birou(1,10,20);
+        /*bir.afisareInformatiiBirou();
+        System.out.println();*/
+
+        // 2. Getterii
+
+        /*System.out.println("Etajul este: "+bir.getEtaj());
+        System.out.println("Ora de deschidere este: "+bir.getOraDeschidere());
+        System.out.println("Ora de inchidere este: "+bir.getOraInchidere());
+        System.out.println();*/
+
+        // 3. Extinde programul de functionare
+
+        /*System.out.println("Ora de inchidere curenta: "+bir.getOraInchidere());
+        bir.extindeProgramFunctionare(22);
+        System.out.println("Ora de inchidere dupa modificare: "+bir.getOraInchidere());
+        System.out.println();*/
+
+        // 4. Afisare program functionare
+
+        /*bir.afisareProgramFunctionare();
+        System.out.println();*/
+
+        // VI. Contabil
+
+        // 1. Constructorii cu parametrii
+
+        Contabil con1=new Contabil(pers1, TipVechime.senior,7500,bir);
+        /*con1.afisareDatePersoana();
+        System.out.println();*/
+
+        Contabil con2=new Contabil("Marian","Sentiment","sentimaalpussslaper69@yahoo.com","0769696969",TipVechime.mediu,6000,bir);
+        /*con2.afisareDatePersoana();
+        System.out.println();*/
+
+        // 2. Getterii
+
+        /*System.out.println("Vechimea este: "+con2.getVechime());
+        System.out.println("Salariul este: "+con2.getSalariu());
+        con2.getBirou().afisareInformatiiBirou();
+        System.out.println();*/
+
+        // 3. Emitere factura
+
+        ArrayList<String> lista_servicii=new ArrayList<String>();
+        lista_servicii.add("Serviciul 1");
+        lista_servicii.add("Serviciul 2");
+        lista_servicii.add("Serviciul 3");
+
+        /*System.out.println(con2.emitereFactura(cli2,lista_servicii));
+        System.out.println();*/
+
+        // 4. Determinare fidelitate
+
+        /*cli3.setNumarViziteService(30);
+        System.out.println("Fidelitatea clientului: "+con2.determinareFidelitate(cli3));
+        System.out.println();*/
+
+        // 5. Emitere raport financiar
+
+        ArrayList<Client> clienti=new ArrayList<Client>();
+        clienti.add(cli1);
+        clienti.add(cli2);
+        clienti.add(cli3);
+        clienti.add(cli4);
+
+        /*System.out.println(con2.emitereRaportFinanciar(clienti));
+        System.out.println();*/
+
+        // 6. Calcularea salariu propriu
+
+        /*System.out.println("Salariul propriu al contabilului: "+String.format("%.2f",con2.calculareSalariuPropriu()));
+        System.out.println();*/
+
+        // 7. Calcularea salariu (contabili sau mecanici)
+
+        /*System.out.println("Salariul unui contabil: "+con2.calculareSalariu((Persoana)con1));
+        System.out.println("Salariul unui mecanic: "+con2.calculareSalariu((Persoana)mec1));
+        System.out.println();*/
+
+        // 8. Calculare profit
+
+        ArrayList<Contabil> contabili=new ArrayList<Contabil>();
+        contabili.add(con1);
+        contabili.add(con2);
+
+        ArrayList<Mecanic> mecanici=new ArrayList<Mecanic>();
+        mecanici.add(mec1);
+        mecanici.add(mec2);
+
+        /*System.out.println("Profitul companiei este: "+con2.calculareProfit(clienti,mecanici,contabili));
+        System.out.println();*/
+
+        // VII. Cladire
+
+        // 1. Constructorul cu parametrii
+
+        ArrayList<Facilitati> facilitati=new ArrayList<Facilitati>();
+        facilitati.add(Facilitati.EsspresorCafea);
+        facilitati.add(Facilitati.Snacks);
+
+        ArrayList<Atelier> ateliere=new ArrayList<Atelier>();
+        ateliere.add(at1);
+        ateliere.add(at2);
+
+        Cladire cl=new Cladire("Strada Principala, Nr 220, Bucuresti",facilitati,bir,ateliere);
+        /*cl.afisareInformatiiCladire();
+        System.out.println();*/
+
+        // 2. Adaugare facilitati
+
+        cl.adaugareFacilitate(Facilitati.Dozator);
+        /*cl.afisareInformatiiCladire();
+        System.out.println();*/
+
+        // 3. Getterii
+
+        /*System.out.println("Adresa este: "+cl.getAdresa());
+        System.out.println("Birou:");
+        cl.getBirou().afisareInformatiiBirou();
+        System.out.println("Facilitati:");
+        for(int i=0;i<cl.getFacilitati().size();i++)
+            System.out.println("Facilitatea "+(i+1)+": "+cl.getFacilitati().get(i));
+        System.out.println("Ateliere:");
+        for(int i=0;i<cl.getAteliere().size();i++) {
+            System.out.println("Atelierul "+(i+1)+": ");
+            cl.getAteliere().get(i).afisareInformatiiAtelier();
+        }
+        System.out.println();*/
+
+        // 4. Ia atelierul dupa indexul dat
+
+        /*Atelier atelier_aux=cl.getAtelierDupaIndexDat(1);
+        if(atelier_aux!=null)
+            atelier_aux.afisareInformatiiAtelier();*/
+
+        // 5. Ia facilitati dupa index dat
+
+        /*Facilitati facilitate=cl.getFacilitateDupaIndex(2);
+        if(facilitate!=null)
+            System.out.println(facilitate);*/
+
+        // 6. Adauga atelier
+
+        /*cl.adaugareAtelier(at3);
+        cl.afisareInformatiiCladire();
+        System.out.println();*/
+
+        // 7. Adauga facilitate
+
+        /*cl.adaugareFacilitate(Facilitati.Dozator);
+        cl.afisareInformatiiCladire();
+        System.out.println();*/
+
+        // 8. Stergere atelier dupa index
+
+        /*cl.stergereAtelierDupaIndex(2);
+        cl.afisareInformatiiCladire();
+        System.out.println();*/
+
+        // 9. Corespunde oras
+
+        /*String oras1="Bucuresti";
+        String oras2="Pitesti";
+        System.out.println("Corespunde oras: "+cl.corespundeOras(oras1));
+        System.out.println("Corespunde oras: "+cl.corespundeOras(oras2));
+        System.out.println();*/
+
+        // 10. Suprafata totala ateliere
+
+        /*System.out.println("Suprafata totala a atelierelor: "+cl.calculeazaSuprafataTotalaAteliere());
+        System.out.println();*/
+
+        // 11. Exista atelier cu numar de ordine
+
+        /*System.out.println("Exista un atelier cu numar de ordine: "+cl.existaAtelierCuNumarOrdine(2));
+        System.out.println("Exista un atelier cu numar de ordine: "+cl.existaAtelierCuNumarOrdine(3));
+        System.out.println();*/
+
+        // 12. Filtrare ateliere dupa suprafata minima
+
+       /*ArrayList<Atelier> ateliere_filtrate=cl.filtreazaAteliereDupaSuprafata(50);
+        if(ateliere_filtrate!=null)
+            for(int i=0;i<ateliere_filtrate.size();i++)
+                ateliere_filtrate.get(i).afisareInformatiiAtelier();
+        System.out.println();*/
+
+        // 13. Sortare dupa suprafata
+
+        /*cl.getAteliere().get(0).setSuprafata(200);
+        cl.sorteazaAteliereDupaSuprafata();
+        cl.afisareInformatiiCladire();
+        System.out.println();*/
+
+        // 14. Sortare dupa numarul de ordine
+
+        /*cl.getAteliere().get(0).setNumarOrdine(2);
+        cl.sorteazaAteliereDupaNumarOrdine();
+        cl.afisareInformatiiCladire();
+        System.out.println();*/
+    }
+}
