@@ -42,7 +42,7 @@ public class Birou {
     }
 
     private Boolean OraInchidereValid(int oraInchidere){
-        return oraInchidere>=18 && oraInchidere<=24;
+        return oraInchidere>=17 && oraInchidere<=24;
     }
 
     public void setOraInchidere(int oraInchidere){

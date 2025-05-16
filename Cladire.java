@@ -16,6 +16,13 @@ public class Cladire {
         setAteliere(ateliere);
     }
 
+    public Cladire(String adresa){
+        setAdresa(adresa);
+        facilitati=new ArrayList<Facilitati>();
+        ateliere=new ArrayList<Atelier>();
+        birou=null;
+    }
+
     public void setAdresa(String adresa){
         if(adresa!=null)
             this.adresa=adresa;
@@ -171,7 +178,8 @@ public class Cladire {
         else
             System.out.println("Cladirea nu ofera facilitati extra!");
         System.out.println("Biroul cladirii:");
-        birou.afisareInformatiiBirou();
+        if(birou!=null)
+            birou.afisareInformatiiBirou();
         System.out.println("Atelierele care se afla in cladire:");
         for(int i=0;i<ateliere.size();i++){
             System.out.println("Atelierul "+(i+1)+":");

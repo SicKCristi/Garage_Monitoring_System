@@ -1,8 +1,35 @@
 package Implementare_modele;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class Main{
+
+    // CONSTANTE FOLOSITE
+
+    private static final int NR_MAXIM_CLADIRI=5;
+    private static final int NR_MAXIM_ATELIERE_PER_CLADIRE=3;
+
+    // FUNCTII AUXILIARE
+
+    private static void afisare_date_cladiri(ArrayList<Cladire> cladiri){
+        if(cladiri==null)
+            System.out.println("Nu exista cladiri pentru aceasta companie!");
+        else
+            for(int i=0;i<cladiri.size();i++){
+                System.out.println("Informatii despre cladirea "+(i+1)+":");
+                cladiri.get(i).afisareInformatiiCladire();
+                System.out.println();
+            }
+    }
+
+    private static boolean sunt_toate_facilitatile_oferite(boolean[] facilitati){
+        for(int i=0;i<facilitati.length;i++)
+            if(facilitati[i]==false)
+                return false;
+        return true;
+    }
+
     public static void main(String[] args) {
 
          // ////////////////////////// //
@@ -222,7 +249,7 @@ class Main{
         System.out.println();*/
 
         // III. 5. Adauga piese utilizate
-        System.out.println("Operatia a fost realizata cu succes: "+at1.adaugarePieseUtilizate(mec1,cli1));
+        //System.out.println("Operatia a fost realizata cu succes: "+at1.adaugarePieseUtilizate(mec1,cli1));
         System.out.println();
 
         // 3. Actualizeaza disponibilitatea
@@ -370,6 +397,10 @@ class Main{
         /*cl.afisareInformatiiCladire();
         System.out.println();*/
 
+        Cladire cl2=new Cladire("Strada Primaverii, Nr 440, Costinesti");
+        /*cl2.afisareInformatiiCladire();
+        System.out.println();*/
+
         // 2. Adaugare facilitati
 
         cl.adaugareFacilitate(Facilitati.Dozator);
@@ -461,5 +492,117 @@ class Main{
         cl.sorteazaAteliereDupaNumarOrdine();
         cl.afisareInformatiiCladire();
         System.out.println();*/
+
+        // ////////////////////////////////////
+        // SIMULAREA FUNCTIONARII APLICATIEI //
+        // ////////////////////////////////////
+
+        ArrayList<Cladire> cladiri_firma=new ArrayList<Cladire>();
+
+        Scanner s=new Scanner(System.in);
+
+        // Este specificat cate cladiri detine firma respectiva
+
+        int nr_cladiri_dorite=0;
+        do{
+            System.out.println("Dati numarul de cladiri dorite");
+            nr_cladiri_dorite=s.nextInt();
+            if(nr_cladiri_dorite<=0 || nr_cladiri_dorite>=NR_MAXIM_CLADIRI){
+                System.out.println();
+                System.out.println("Numarul introdus nu este valid! Incearca altceva!");
+                System.out.println();
+            }
+        }while(nr_cladiri_dorite<=0 || nr_cladiri_dorite>=NR_MAXIM_CLADIRI);
+        s.nextLine();
+        System.out.println();
+
+        // Vom citi datele pentru cladirile furnizate
+
+        do{
+            System.out.println("Dati datele despre cladirea "+(cladiri_firma.size()+1)+":");
+            System.out.print("Dati adresa cladirii:");
+            String adresa=s.nextLine();
+            cladiri_firma.add(new Cladire(adresa));
+        }while(cladiri_firma.size()<nr_cladiri_dorite);
+        System.out.println();
+
+        /*Pentru inceput, vom afisa datele despre cladiri
+        Main.afisare_date_cladiri(cladiri_firma);*/
+
+        // Vom construi cate un birou pentru fiecare cladire
+
+        int nr_birouri=0;
+        do{
+            System.out.println("Dati datele despre biroul "+(nr_birouri+1)+":");
+            System.out.print("Dati etajul biroului:");
+            int etaj=s.nextInt();
+            System.out.print("Dati ora de deschidere a biroului:");
+            int ora_deschidere=s.nextInt();
+            System.out.print("Dati ora de inchidere a biroului:");
+            int ora_inchidere=s.nextInt();
+            cladiri_firma.get(nr_birouri).setBirou(new Birou(etaj,ora_deschidere,ora_inchidere));
+            nr_birouri++;
+        }while(nr_birouri<cladiri_firma.size());
+        System.out.println();
+
+        /*Vom afisa datele cladirilor dupa ce am adaugat si birourile in componenta acestora
+        Main.afisare_date_cladiri(cladiri_firma);*/
+
+        // Vom adauga facilitati pentru fiecare cladire
+
+        int nr_cladiri=0;
+        do{
+            boolean[] facilitati_prezente={false, false, false};
+            do {
+                System.out.println("---------------------");
+                System.out.println("Selectati facilitatea pe care doriti sa o adaugati");
+                System.out.println("1. Dozator");
+                System.out.println("2. Esspressor Cafea");
+                System.out.println("3. Snacks");
+                System.out.println("---------------------");
+                System.out.println();
+                System.out.println("Sa se dea una dintre optiunile de mai sus:");
+                int optiune = s.nextInt();
+
+                switch (optiune){
+                    case 1:{
+                        cladiri_firma.get(nr_cladiri).adaugareFacilitate(Facilitati.Dozator);
+                        facilitati_prezente[0]=true;
+                        break;
+                    }
+                    case 2:{
+                        cladiri_firma.get(nr_cladiri).adaugareFacilitate(Facilitati.EsspresorCafea);
+                        facilitati_prezente[1]=true;
+                        break;
+                    }
+                    case 3:{
+                        cladiri_firma.get(nr_cladiri).adaugareFacilitate(Facilitati.Snacks);
+                        facilitati_prezente[2]=true;
+                        break;
+                    }
+                    default:
+                        System.out.println("Optiunea nu este valida, nu s-a adaugat nicio facilitate!");
+                }
+
+                String raspuns=s.nextLine();
+                System.out.println();
+                System.out.println("Mai doriti facilitati?");
+                System.out.println("d-DA si n-NU");
+                raspuns=s.nextLine();
+                if(raspuns.equals("n"))
+                    break;
+
+                if(Main.sunt_toate_facilitatile_oferite(facilitati_prezente))
+                    System.out.println("Toate facilitatile au fost luate!");
+                System.out.println();
+            }while(!Main.sunt_toate_facilitatile_oferite(facilitati_prezente));
+
+            nr_cladiri++;
+        }while(nr_cladiri<cladiri_firma.size());
+
+        // Afisam cladirile dupa ce am adaugat si facilitatile
+        Main.afisare_date_cladiri(cladiri_firma);
+
+        s.close();
     }
 }
