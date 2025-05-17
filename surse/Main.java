@@ -31,10 +31,43 @@ class Main{
         return true;
     }
 
+    public static int calculare_numar_total_ateliere(ArrayList<Cladire> cladiri){
+        int nr_ateliere=0;
+        for(int i=0;i<cladiri.size();i++)
+            nr_ateliere+=cladiri.get(i).getAteliere().size();
+        return nr_ateliere;
+    }
+
+    public static ArrayList<Atelier> toate_atelierele(ArrayList<Cladire> cladiri){
+        ArrayList<Atelier> ateliere=new ArrayList<Atelier>();
+        for(int i=0;i<cladiri.size();i++){
+            ArrayList<Atelier> aux=cladiri.get(i).getAteliere();
+            for(int j=0;j<aux.size();j++)
+                ateliere.add(aux.get(j));
+        }
+        return ateliere;
+    }
+
     public static void afisare_date_clienti(ArrayList<Client> clienti){
         for(int i=0;i<clienti.size();i++){
             System.out.println("Clientul "+(i+1)+":");
             clienti.get(i).afisareDatePersoana();
+            System.out.println();
+        }
+    }
+
+    public static void afisare_date_mecanici(ArrayList<Mecanic> mecanici){
+        for(int i=0;i<mecanici.size();i++){
+            System.out.println("Mecanicul "+(i+1)+":");
+            mecanici.get(i).afisareDatePersoana();
+            System.out.println();
+        }
+    }
+
+    public static void afisare_date_contabili(ArrayList<Contabil> contabili){
+        for(int i=0;i<contabili.size();i++){
+            System.out.println("Contabilul "+(i+1)+":");
+            contabili.get(i).afisareDatePersoana();
             System.out.println();
         }
     }
@@ -379,13 +412,13 @@ class Main{
 
         // 8. Calculare profit
 
-        ArrayList<Contabil> contabili=new ArrayList<Contabil>();
-        contabili.add(con1);
-        contabili.add(con2);
+        ArrayList<Contabil> contabili_aux=new ArrayList<Contabil>();
+        contabili_aux.add(con1);
+        contabili_aux.add(con2);
 
-        ArrayList<Mecanic> mecanici=new ArrayList<Mecanic>();
-        mecanici.add(mec1);
-        mecanici.add(mec2);
+        ArrayList<Mecanic> mecanici_aux=new ArrayList<Mecanic>();
+        mecanici_aux.add(mec1);
+        mecanici_aux.add(mec2);
 
         /*System.out.println("Profitul companiei este: "+con2.calculareProfit(clienti,mecanici,contabili));
         System.out.println();*/
@@ -398,11 +431,11 @@ class Main{
         facilitati.add(Facilitati.EsspresorCafea);
         facilitati.add(Facilitati.Snacks);
 
-        ArrayList<Atelier> ateliere=new ArrayList<Atelier>();
-        ateliere.add(at1);
-        ateliere.add(at2);
+        ArrayList<Atelier> ateliere_aux=new ArrayList<Atelier>();
+        ateliere_aux.add(at1);
+        ateliere_aux.add(at2);
 
-        Cladire cl=new Cladire("Strada Principala, Nr 220, Bucuresti",facilitati,bir,ateliere);
+        Cladire cl=new Cladire("Strada Principala, Nr 220, Bucuresti",facilitati,bir,ateliere_aux);
         /*cl.afisareInformatiiCladire();
         System.out.println();*/
 
@@ -671,6 +704,7 @@ class Main{
                 System.out.println();
             }
         }while(nr_clienti<=0 || nr_clienti>=NR_MAXIM_CLIENTI);
+        System.out.println();
         s.nextLine();
 
         // Citim datele despre clienti
@@ -731,8 +765,172 @@ class Main{
             System.out.println();
         }
 
-        // Afisam datele despre clienti
-        Main.afisare_date_clienti(clienti);
+        /*Afisam datele despre clienti
+        Main.afisare_date_clienti(clienti);*/
+
+        // Acum calculam cate ateliere sunt, pentru a putea sti cati mecanici avem in aplicatie
+        // Fiecarui atelier ii corespunde un mecanic
+
+        int nr_mecanici=Main.calculare_numar_total_ateliere(cladiri_firma);
+        ArrayList<Mecanic> mecanici=new ArrayList<Mecanic>();
+        for(int i=0;i<nr_mecanici;i++){
+            System.out.print("Sa se dea numele mecanicului:");
+            String nume=s.nextLine();
+            System.out.print("Sa se dea prenumele mecanicului:");
+            String prenume=s.nextLine();
+            System.out.print("Sa se dea emailul mecanicului:");
+            String email=s.nextLine();
+            System.out.print("Sa se dea telefonul mecanicului:");
+            String telefon=s.nextLine();
+
+            int optiune;
+            do{
+                System.out.println("---------------------");
+                System.out.println("Selectati vechimea mecanicului:");
+                System.out.println("1. Incepator");
+                System.out.println("2. Mediu");
+                System.out.println("3. Senior");
+                System.out.println("---------------------");
+                System.out.println();
+                System.out.print("Sa se dea una dintre optiunile de mai sus:");
+                optiune=s.nextInt();
+                if(optiune<=0 || optiune>3){
+                    System.out.println();
+                    System.out.println("Optiunea introdusa este invalida! Trebuie sa fie 1, 2 sau 3!");
+                    System.out.println();
+                }
+            }while(optiune<=0 || optiune>3);
+
+            TipVechime vechime=TipVechime.incepator;
+            switch(optiune){
+                case 1:{
+                    vechime=TipVechime.incepator;
+                    break;
+                }
+                case 2:{
+                    vechime=TipVechime.mediu;
+                    break;
+                }
+                case 3:{
+                    vechime=TipVechime.senior;
+                    break;
+                }
+                default:
+                    System.out.println("Vechime invalida");
+            }
+            System.out.println();
+
+            do{
+                System.out.println("---------------------");
+                System.out.println("Selectati categoria autoehiculului clientului:");
+                System.out.println("1. Categoria A");
+                System.out.println("2. Categoria B");
+                System.out.println("3. Categoria C");
+                System.out.println("---------------------");
+                System.out.println();
+                System.out.print("Sa se dea una dintre optiunile de mai sus:");
+                optiune=s.nextInt();
+                if(optiune<=0 || optiune>3){
+                    System.out.println();
+                    System.out.println("Optiunea introdusa este invalida! Trebuie sa fie 1, 2 sau 3!");
+                    System.out.println();
+                }
+            }while(optiune<=0 || optiune>3);
+
+            TipAutomobil categorie=TipAutomobil.A;
+            switch(optiune){
+                case 1:{
+                    categorie=TipAutomobil.A;
+                    break;
+                }
+                case 2:{
+                    categorie=TipAutomobil.B;
+                    break;
+                }
+                case 3:{
+                    categorie=TipAutomobil.C;
+                    break;
+                }
+                default: System.out.println("Categorie invalida");
+            }
+
+            System.out.print("Sa se dea disponibilitatea mecanicului:");
+            boolean disponibilitate=s.nextBoolean();
+            System.out.print("Sa se dea salariul mecanicului:");
+            int salariu=s.nextInt();
+            s.nextLine();
+
+            mecanici.add(new Mecanic(nume,prenume,email,telefon,categorie,vechime,disponibilitate,salariu));
+            System.out.println();
+        }
+        System.out.println();
+
+        // Se asigneaza mecanicilor cate un atelier
+        ArrayList<Atelier> ateliere=Main.toate_atelierele(cladiri_firma);
+        for(int i=0;i<mecanici.size();i++)
+            mecanici.get(i).setAtelier(ateliere.get(i));
+
+        /*Afisam informatiile despre mecanici
+        Main.afisare_date_mecanici(mecanici);*/
+
+        ArrayList<Contabil> contabili=new ArrayList<Contabil>();
+        for(int i=0;i<cladiri_firma.size();i++){
+            System.out.print("Sa se dea numele contabilului:");
+            String nume=s.nextLine();
+            System.out.print("Sa se dea prenumele contabilului:");
+            String prenume=s.nextLine();
+            System.out.print("Sa se dea emailul contabilului:");
+            String email=s.nextLine();
+            System.out.print("Sa se dea telefonul contabilului:");
+            String telefon=s.nextLine();
+
+            int optiune;
+            do{
+                System.out.println("---------------------");
+                System.out.println("Selectati vechimea mecanicului:");
+                System.out.println("1. Incepator");
+                System.out.println("2. Mediu");
+                System.out.println("3. Senior");
+                System.out.println("---------------------");
+                System.out.println();
+                System.out.print("Sa se dea una dintre optiunile de mai sus:");
+                optiune=s.nextInt();
+                if(optiune<=0 || optiune>3){
+                    System.out.println();
+                    System.out.println("Optiunea introdusa este invalida! Trebuie sa fie 1, 2 sau 3!");
+                    System.out.println();
+                }
+            }while(optiune<=0 || optiune>3);
+
+            TipVechime vechime=TipVechime.incepator;
+            switch(optiune){
+                case 1:{
+                    vechime=TipVechime.incepator;
+                    break;
+                }
+                case 2:{
+                    vechime=TipVechime.mediu;
+                    break;
+                }
+                case 3:{
+                    vechime=TipVechime.senior;
+                    break;
+                }
+                default:
+                    System.out.println("Vechime invalida");
+            }
+            System.out.println();
+
+            System.out.print("Sa se dea salariul contabilului:");
+            int salariu=s.nextInt();
+
+            contabili.add(new Contabil(nume,prenume,email,telefon,vechime,salariu,cladiri_firma.get(i).getBirou()));
+            System.out.println();
+        }
+        System.out.println();
+
+        /*Afiseaza datele despre contabili
+        Main.afisare_date_contabili(contabili);*/
 
         s.close();
     }

@@ -113,7 +113,7 @@ public class Atelier {
 
         if(!mecanic.poateReparaMasinaClient(client)){
             System.out.println("Mecanicul " + mecanic.getNume() + " " + mecanic.getPrenume() +
-                    " nu poate repara masina de categorie " + client.getCategorie() + ".");
+                    " nu poate repara mașina de categorie " + client.getCategorie());
             return false;
         }
 
@@ -121,17 +121,17 @@ public class Atelier {
         int[] cantitatiNecesare=client.getCantitatiNecesare();
 
         if(pieseNecesare==null || cantitatiNecesare==null){
-            System.out.println("Nu se cunoaste concret de ce piese are nevoie clientul.");
+            System.out.println("Datele despre piesele necesare sau cantitățile nu sunt disponibile.");
             return false;
         }
 
         if(pieseNecesare.length!=cantitatiNecesare.length){
-            System.out.println("Cantitati necesare diferite de numarul total necesar de piese.");
+            System.out.println("Numărul de piese nu corespunde cu numărul de cantități.");
             return false;
         }
 
-        for (int k : cantitatiNecesare) {
-            if (k < 0) {
+        for(int i=0;i<cantitatiNecesare.length;i++){
+            if(cantitatiNecesare[i]<0){
                 System.out.println("Cantitatea pieselor nu poate fi negativă.");
                 throw new IllegalArgumentException();
             }
@@ -186,15 +186,13 @@ public class Atelier {
             }
         }
 
-        if (!s_auAdaugatPiese) {
-            System.out.println("Nu s-a putut adauga nicio piesa, stocul este insuficient.");
-            return false;
-        } else {
-            if (!toatePieseleDisponibile) {
-                System.out.println("S-au adăugat doar o parte din piesele necesare.");
-            } else {
-                System.out.println("Au fost adaugate toate piesele cu succes.");
+        if(!s_auAdaugatPiese){
+            if(pieseAdaugate.length()==0){
+                System.out.println("Nu exista piese in stoc.");
+            } else{
+                System.out.println("Nu s-au putut adauga piese la lucrare.");
             }
+            return false;
         }
 
         mecanic.emitereRaport(client,pieseAdaugate.toString());

@@ -27,6 +27,15 @@ public class Mecanic extends Persoana {
         setAtelier(atelier);
     }
 
+    public Mecanic(String nume, String prenume, String email, String telefon, TipAutomobil categorieAcceptata, TipVechime vechime, Boolean disponibilitate, int salariu){
+        super(nume,prenume,email,telefon);
+        setCategorie_Acceptata(categorieAcceptata);
+        setVechime(vechime);
+        setDisponibilitate(disponibilitate);
+        setSalariu(salariu);
+        atelier=null;
+    }
+
     public Mecanic(Persoana p, TipAutomobil categorieAcceptata, TipVechime vechime, Boolean disponibilitate, int salariu, Atelier atelier){
         super(p);
         setCategorie_Acceptata(categorieAcceptata);
@@ -35,6 +44,8 @@ public class Mecanic extends Persoana {
         setSalariu(salariu);
         setAtelier(atelier);
     }
+
+
 
     public void setCategorie_Acceptata(TipAutomobil categorieAcceptata){
         this.categorieAcceptata=categorieAcceptata;
