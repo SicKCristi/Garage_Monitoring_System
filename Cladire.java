@@ -184,6 +184,7 @@ public class Cladire {
         for(int i=0;i<ateliere.size();i++){
             System.out.println("Atelierul "+(i+1)+":");
             ateliere.get(i).afisareInformatiiAtelier();
+            System.out.println();
         }
     }
 }

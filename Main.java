@@ -9,6 +9,7 @@ class Main{
 
     private static final int NR_MAXIM_CLADIRI=5;
     private static final int NR_MAXIM_ATELIERE_PER_CLADIRE=3;
+    private static final int NR_MAXIM_CLIENTI=6;
 
     // FUNCTII AUXILIARE
 
@@ -28,6 +29,14 @@ class Main{
             if(facilitati[i]==false)
                 return false;
         return true;
+    }
+
+    public static void afisare_date_clienti(ArrayList<Client> clienti){
+        for(int i=0;i<clienti.size();i++){
+            System.out.println("Clientul "+(i+1)+":");
+            clienti.get(i).afisareDatePersoana();
+            System.out.println();
+        }
     }
 
     public static void main(String[] args) {
@@ -348,11 +357,11 @@ class Main{
 
         // 5. Emitere raport financiar
 
-        ArrayList<Client> clienti=new ArrayList<Client>();
-        clienti.add(cli1);
-        clienti.add(cli2);
-        clienti.add(cli3);
-        clienti.add(cli4);
+        ArrayList<Client> clienti_aux=new ArrayList<Client>();
+        clienti_aux.add(cli1);
+        clienti_aux.add(cli2);
+        clienti_aux.add(cli3);
+        clienti_aux.add(cli4);
 
         /*System.out.println(con2.emitereRaportFinanciar(clienti));
         System.out.println();*/
@@ -592,16 +601,138 @@ class Main{
                 if(raspuns.equals("n"))
                     break;
 
-                if(Main.sunt_toate_facilitatile_oferite(facilitati_prezente))
+                if(Main.sunt_toate_facilitatile_oferite(facilitati_prezente)) {
+                    System.out.println();
                     System.out.println("Toate facilitatile au fost luate!");
+                }
+
                 System.out.println();
             }while(!Main.sunt_toate_facilitatile_oferite(facilitati_prezente));
 
             nr_cladiri++;
         }while(nr_cladiri<cladiri_firma.size());
+        System.out.println();
 
-        // Afisam cladirile dupa ce am adaugat si facilitatile
-        Main.afisare_date_cladiri(cladiri_firma);
+        /*Afisam cladirile dupa ce am adaugat si facilitatile
+        Main.afisare_date_cladiri(cladiri_firma);*/
+
+        // Adaugam ateliere pentru fiecare cladire
+
+        for(int i=0;i<cladiri_firma.size();i++){
+            int nr_ateliere_cladire=0;
+            do{
+                System.out.print("Sa se precizeze suprafata atelierului:");
+                double suprafata=s.nextDouble();
+
+                int nr_ordine=0;
+                do{
+                    System.out.print("Sa se precizeze numarul de ordine al atelierului:");
+                    nr_ordine=s.nextInt();
+                    if(nr_ordine<=0){
+                        System.out.println();
+                        System.out.println("Numarul de ordine trebuie sa fie un intreg pozitiv!");
+                        System.out.println();
+                    }
+                }while(nr_ordine<=0);
+
+                cladiri_firma.get(i).adaugareAtelier(new Atelier(suprafata,nr_ordine));
+                System.out.println();
+                nr_ateliere_cladire++;
+
+                String raspuns=s.nextLine();
+                System.out.println("Doriti sa mai adaugati un atelier?");
+                System.out.println("d-DA sau n-NU");
+                raspuns=s.nextLine();
+                if(raspuns.equals("n"))
+                    break;
+
+                if(nr_ateliere_cladire==NR_MAXIM_ATELIERE_PER_CLADIRE){
+                    System.out.println();
+                    System.out.println("S-au specificat toate atelierele posibile pentru cladirea "+(i+1)+"!");
+                }
+
+                System.out.println();
+            }while(nr_ateliere_cladire<NR_MAXIM_ATELIERE_PER_CLADIRE);
+        }
+        System.out.println();
+
+        /*Acum afisam cladirile dupa adaugarea atelierelor
+        Main.afisare_date_cladiri(cladiri_firma);*/
+
+        // Cerem numarul de clienti care au trecut pe la atelier
+
+        int nr_clienti=0;
+        do{
+            System.out.println("Sa se dea numarul de clienti care au venit la atelier");
+            nr_clienti=s.nextInt();
+            if(nr_clienti<=0 || nr_clienti>=NR_MAXIM_CLIENTI){
+                System.out.println();
+                System.out.println("Numarul de clienti dat este invalid! Trebuie sa fie pozitiv si mai mic decat "+NR_MAXIM_CLIENTI+"!");
+                System.out.println();
+            }
+        }while(nr_clienti<=0 || nr_clienti>=NR_MAXIM_CLIENTI);
+        s.nextLine();
+
+        // Citim datele despre clienti
+
+        ArrayList<Client> clienti=new ArrayList<Client>();
+        for(int i=0;i<nr_clienti;i++){
+            System.out.print("Sa se dea numele clientului:");
+            String nume=s.nextLine();
+            System.out.print("Sa se dea prenumele clientului:");
+            String prenume=s.nextLine();
+            System.out.print("Sa se dea emailul clientului:");
+            String email=s.nextLine();
+            System.out.print("Sa se dea telefonul clientului:");
+            String telefon=s.nextLine();
+
+            int optiune;
+            do{
+                System.out.println("---------------------");
+                System.out.println("Selectati categoria autoehiculului clientului:");
+                System.out.println("1. Categoria A");
+                System.out.println("2. Categoria B");
+                System.out.println("3. Categoria C");
+                System.out.println("---------------------");
+                System.out.println();
+                System.out.print("Sa se dea una dintre optiunile de mai sus:");
+                optiune=s.nextInt();
+                if(optiune<=0 || optiune>3){
+                    System.out.println();
+                    System.out.println("Optiunea introdusa este invalida! Trebuie sa fie 1, 2 sau 3!");
+                    System.out.println();
+                }
+            }while(optiune<=0 || optiune>3);
+            TipAutomobil categorie=TipAutomobil.A;
+            switch(optiune){
+                case 1:{
+                    categorie=TipAutomobil.A;
+                    break;
+                }
+                case 2:{
+                    categorie=TipAutomobil.B;
+                    break;
+                }
+                case 3:{
+                    categorie=TipAutomobil.C;
+                    break;
+                }
+                default: System.out.println("Categorie invalida");
+            }
+            s.nextLine();
+
+            System.out.print("Sa se dea numarul cardului clientului:");
+            String nr_card=s.nextLine();
+            System.out.print("Sa se dea numarul de vizite al clientului:");
+            int nr_vizite=s.nextInt();
+            s.nextLine();
+
+            clienti.add(new Client(nume,prenume,email,telefon,categorie,nr_card,nr_vizite));
+            System.out.println();
+        }
+
+        // Afisam datele despre clienti
+        Main.afisare_date_clienti(clienti);
 
         s.close();
     }
