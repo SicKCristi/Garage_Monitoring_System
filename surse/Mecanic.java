@@ -99,15 +99,15 @@ public class Mecanic extends Persoana {
         }
 
         switch(categorieAcceptata){
-            case TipAutomobil.A:{
+            case A:{
                 timp_reparare=TIMP_CATEGORIA_A;
                 break;
             }
-            case TipAutomobil.B:{
+            case B:{
                 timp_reparare=TIMP_CATEGORIA_B;
                 break;
             }
-            case TipAutomobil.C:{
+            case C:{
                 timp_reparare=TIMP_CATEGORIA_C;
                 break;
             }
@@ -115,15 +115,15 @@ public class Mecanic extends Persoana {
         }
 
         switch(vechime){
-            case TipVechime.incepator:{
+            case incepator:{
                 timp_reparare-=REDUCERE_TIMP_INCEPATOR*timp_reparare;
                 break;
             }
-            case TipVechime.mediu:{
+            case mediu:{
                 timp_reparare-=REDUCERE_TIMP_MEDIU*timp_reparare;
                 break;
             }
-            case TipVechime.senior:{
+            case senior:{
                 timp_reparare-=REDUCERE_TIMP_SENIOR*timp_reparare;
                 break;
             }
