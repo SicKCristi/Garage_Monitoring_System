@@ -139,15 +139,15 @@ public class Client extends Persoana {
     public double pretServiciu(){
         double pret_serviciu;
         switch(categorie){
-            case TipAutomobil.A:{
+            case A:{
                 pret_serviciu=PRET_CATEGORIA_A;
                 break;
             }
-            case TipAutomobil.B:{
+            case B:{
                 pret_serviciu=PRET_CATEGORIA_B;
                 break;
             }
-            case TipAutomobil.C:{
+            case C:{
                 pret_serviciu=PRET_CATEGORIA_C;
                 break;
             }
