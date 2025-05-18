@@ -357,7 +357,7 @@ class Main{
 
         // 1. Constructorii cu parametrii
 
-        Contabil con1=new Contabil(pers1, TipVechime.senior,7500,bir);
+        Contabil con1=new Contabil(pers1, TipVechime.incepator,7500,bir);
         /*con1.afisareDatePersoana();
         System.out.println();*/
 
@@ -405,11 +405,11 @@ class Main{
         System.out.println();*/
 
         // 7. Calcularea salariu (contabili sau mecanici)
-
-        /*System.out.println("Salariul unui contabil: "+con2.calculareSalariu((Persoana)con1));
+        /*
+        System.out.println("Salariul unui contabil: "+con2.calculareSalariu((Persoana)con1));
         System.out.println("Salariul unui mecanic: "+con2.calculareSalariu((Persoana)mec1));
-        System.out.println();*/
-
+        System.out.println();
+        */
         // 8. Calculare profit
 
         ArrayList<Contabil> contabili_aux=new ArrayList<Contabil>();

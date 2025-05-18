@@ -92,7 +92,7 @@ public class Client extends Persoana {
     }
 
     public Boolean esteNumarViziteServiceValid(int numarViziteService){
-        return numarViziteService>0;
+        return numarViziteService>=0;
     }
 
     public void setNumarViziteService(int numarViziteService){

@@ -157,6 +157,7 @@ public class Contabil extends Persoana {
             switch(mecanic.getVechime()){
                 case incepator:
                     coeficientBonus=AMPLIFICARE_SALARIU_INCEPATOR;
+                    break;
                 case mediu:
                     coeficientBonus=AMPLIFICARE_SALARIU_MEDIU;
                     break;
@@ -173,6 +174,7 @@ public class Contabil extends Persoana {
             switch(contabil.getVechime()){
                 case incepator:
                     coeficientBonus=AMPLIFICARE_SALARIU_INCEPATOR;
+                    break;
                 case mediu:
                     coeficientBonus=AMPLIFICARE_SALARIU_MEDIU;
                     break;
