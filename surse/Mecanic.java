@@ -75,7 +75,7 @@ public class Mecanic extends Persoana {
         return vechime;
     }
 
-    public Boolean getDisponibilitate(){
+    public boolean getDisponibilitate(){
         return disponibilitate;
     }
 

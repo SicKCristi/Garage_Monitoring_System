@@ -24,7 +24,7 @@ class Main{
             }
     }
 
-    private static boolean sunt_toate_facilitatile_oferite(boolean[] facilitati){
+    private static Boolean sunt_toate_facilitatile_oferite(boolean[] facilitati){
         for(int i=0;i<facilitati.length;i++)
             if(facilitati[i]==false)
                 return false;
@@ -855,7 +855,7 @@ class Main{
             }
 
             System.out.print("Sa se dea disponibilitatea mecanicului:");
-            boolean disponibilitate=s.nextBoolean();
+            Boolean disponibilitate=s.nextBoolean();
             System.out.print("Sa se dea salariul mecanicului:");
             int salariu=s.nextInt();
             s.nextLine();

@@ -152,7 +152,7 @@ public class CalculareSalariuTest {
                 "0767439761",
                 TipAutomobil.A,
                 TipVechime.incepator,
-                true,
+                (Boolean) true,
                 5000
         );
 
@@ -177,7 +177,7 @@ public class CalculareSalariuTest {
                 "0745951963",
                 TipAutomobil.C,
                 TipVechime.mediu,
-                true,
+                (Boolean)true,
                 5000
         );
 
@@ -202,7 +202,7 @@ public class CalculareSalariuTest {
                 "0723967712",
                 TipAutomobil.B,
                 TipVechime.senior,
-                true,
+                (Boolean)true,
                 5000
         );
 
